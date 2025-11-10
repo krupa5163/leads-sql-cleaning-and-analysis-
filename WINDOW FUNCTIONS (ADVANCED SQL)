@@ -1,0 +1,20 @@
+#Top 3 cities with highest leads
+WITH city_counts AS (
+    SELECT 
+        current_city,
+        COUNT(*) AS total_leads
+    FROM leads
+    GROUP BY current_city
+)
+SELECT *
+FROM city_counts
+ORDER BY total_leads DESC
+LIMIT 3;
+#Leads whose age is greater than the average age of their gender
+SELECT *
+FROM leads l
+WHERE age > (
+    SELECT AVG(age)
+    FROM leads
+    WHERE gender = l.gender
+);
