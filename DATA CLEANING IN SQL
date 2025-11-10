@@ -1,0 +1,30 @@
+create database code;
+use code;
+select * from leads;
+rename table leads_basic_details to leads;
+#Check total rows and columns
+select count(*) as total_row from leads; 
+#Find NULL values in each column
+SELECT 
+    SUM(CASE WHEN lead_id IS NULL THEN 1 END) AS null_lead_id,
+    SUM(CASE WHEN age IS NULL THEN 1 END) AS null_age,
+    SUM(CASE WHEN gender IS NULL THEN 1 END) AS null_gender,
+    SUM(CASE WHEN current_city IS NULL THEN 1 END) AS null_city,
+    SUM(CASE WHEN current_education IS NULL THEN 1 END) AS null_education,
+    SUM(CASE WHEN parent_occupation IS NULL THEN 1 END) AS null_occupation,
+    SUM(CASE WHEN lead_gen_source IS NULL THEN 1 END) AS null_source
+FROM leads;
+#Remove rows with NULL values
+delete from leads
+WHERE 
+    lead_id IS NULL OR 
+    age IS NULL OR 
+    gender IS NULL OR 
+    current_city IS NULL OR 
+    current_education IS NULL OR 
+    parent_occupation IS NULL OR 
+    lead_gen_source IS NULL;
+#Check duplicate rows
+select lead_id,count(*) as count from leads 
+group by lead_id
+having count(*) > 1;
