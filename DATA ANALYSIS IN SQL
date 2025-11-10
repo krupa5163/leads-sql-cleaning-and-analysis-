@@ -1,0 +1,32 @@
+
+#Count leads by gender
+select gender ,count(*) as total_leades
+from leads
+group by gender;
+
+#Count leads by city
+select current_city, count(*) as total_leads
+from leads
+group by current_city
+order by current_city desc;
+
+#Count leads by education
+select current_education ,count(*) as total_leads
+from leads
+group by current_education;
+
+#Count leads by parent occupation
+select parent_occupation , count(*) as total_leads
+from leads 
+group by parent_occupation;
+
+#Top lead generation source
+select lead_gen_source , count(*) as total_leads
+from leads 
+group by lead_gen_source
+order by lead_gen_source desc;
+
+#Age distribution
+select age , count(*) as total_leads
+from leads
+group by age;
